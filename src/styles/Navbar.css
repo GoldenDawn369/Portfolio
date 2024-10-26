@@ -1,0 +1,45 @@
+/* Navbar.css */
+
+.navbar {
+    position: fixed;
+    top: 100%; /* Start off-screen at the bottom */
+    right: 2vw;
+    display: flex;
+    flex-direction: column;
+    transition: top 0.5s ease-out; /* Smooth and fast animation */
+    z-index: 10; /* Ensure Navbar is above the Canvas */
+    pointer-events: auto; /* Ensure Navbar can receive pointer events */
+}
+
+.navbar.navbar-animate {
+    top: 2.7vh; /* Final position */
+}
+
+.nav-item {
+    color: grey;
+    font-size: 1.65rem;
+    font-weight: 500;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+    color: white;
+}
+
+.nav-item.selected {
+    color: white;
+    font-weight: bold;
+}
+
+.nav-item.selected::after {
+    content: '';
+    position: absolute;
+    right: -10px; /* Position to the right of the item */
+    width: 4px;   /* Bar width */
+    height: 50%;  /* Half the height of the item */
+    top: 25%;     /* Center the bar vertically */
+    background-color: #00bfff;  /* The teal color */
+}

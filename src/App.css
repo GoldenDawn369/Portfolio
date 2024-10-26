@@ -1,0 +1,153 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('C:\Users\Rober\Personal Projects\portfolio-project\public\background4.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  position: relative;
+}
+.content-container {
+  display: flex;
+  align-items: center;
+}
+
+.paragraph-container {
+  margin-left: 20px; /* Adjust spacing between canvas and paragraph */
+  color: white;
+  max-width: 300px;
+}
+
+
+
+.paragraph {
+  position: absolute;
+  top: 25vh;
+  right: 19.6vw;
+  color: white;
+  max-width: 300px;
+  font-size: 2.3rem;
+  line-height: 1.5;
+  white-space: normal; /* Allow text to wrap naturally */
+  word-break: break-word; /* Ensure words wrap at the end of the line */
+}
+
+/* Ensure each word behaves like a block, preventing breaks between characters */
+.word {
+  display: inline-block;
+}
+
+/* Letter-by-letter reveal effect for each character */
+.word span {
+  opacity: 0;
+  display: inline-block;
+  animation: fadeInLetter 0.05s forwards, glow 4s infinite alternate, streaky-move 4s linear infinite;
+  animation-delay: calc(var(--char-index) * 0.02s); /* Stagger each letter */
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeInLetter {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* Slight motion from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.streaky-glow {
+  font-family: inherit;
+  color: transparent;
+  background: linear-gradient(90deg, #fff, rgba(255, 200, 0, 0.679), #0ff, #fff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: glow 4s infinite alternate, streaky-move 4s linear infinite;
+}
+
+/* Glow animation */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.2),
+    0 0 40px rgba(255, 255, 255, 0.2),
+    0 0 60px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 40px rgba(255, 255, 255, 0.8),
+    0 0 60px rgba(255, 255, 255, 1);
+  }
+}
+
+/* Streaky moving gradient */
+@keyframes streaky-move {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+/* Canvas container styles */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1; /* Ensure Canvas is behind the Navbar */
+}
