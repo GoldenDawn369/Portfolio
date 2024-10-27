@@ -41,8 +41,8 @@ function AstronautModel({ onLoaded }) {
                     map: textures[textureIndex % textures.length] || null,
                     color: new Color(0xffffff),
                     side: DoubleSide,
-                    roughness: 0.5,
-                    metalness: 0.5,
+                    roughness: 0.09,
+                    metalness: 0.12,
                 });
 
                 child.castShadow = true;
@@ -107,7 +107,9 @@ export default function AstronautCanvas() {
                 <AstronautModel onLoaded={handleLoaded} />
             </Suspense>
 
-            <OrbitControls />
+            <OrbitControls
+                enableZoom={false}
+            />
         </Canvas>
     );
 }

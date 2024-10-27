@@ -40,7 +40,7 @@ export default function Header({ onSecondTypingComplete, onTypingComplete }) {
                 <h1 className="name" onAnimationEnd={handleNameAnimationEnd}>Robertas Buila</h1>
                 {showTitle && (
                     <p className="title" onAnimationEnd={handleTitleAnimationEnd}>
-                        Software Developer
+                        Fullstack Engineer
                     </p>
                 )}
             </div>

@@ -4,6 +4,8 @@ import AstronautCanvas from './components/Cooler_astronaut_glb';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import TechStack from './components/TechStack';
+import Experience from './components/Experience';
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import './App.css';
 
 function App() {
@@ -16,9 +18,15 @@ function App() {
     // Show the astronaut only after the model is loaded and the second animation is complete
     useEffect(() => {
         if (modelLoaded && secondAnimationComplete) {
-            setTimeout(() => {
-                setShowAstronaut(true);
-            }, 0); // Show the astronaut immediately after both conditions are met
+            setShowAstronaut(true); // Show the astronaut immediately
+
+            // Add a 50 ms delay after showing the astronaut
+            const delay = setTimeout(() => {
+                // Do nothing here; the delay is simply added after the astronaut appears
+            }, 50);
+
+            // Cleanup the timeout
+            return () => clearTimeout(delay);
         }
     }, [modelLoaded, secondAnimationComplete]);
 
@@ -34,62 +42,73 @@ function App() {
 
     // Callback when the typing animation completes
     const handleTypingComplete = () => {
-        // Show the paragraph after typing is done
         setTimeout(() => {
             setShowParagraph(true);
-        }, 18); // 18ms delay
+        }, 18);
 
-        // Delay showing the Navbar for a smooth transition after paragraph animation
         setTimeout(() => {
             setShowNavbar(true);
-        }, 2018); // Adjust delay to match paragraph animation plus the 18ms delay
+        }, 2018);
     };
 
     return (
+<ParallaxProvider>
         <div className="App">
             {/* Navbar appears after all animations */}
             {showNavbar && <Navbar />}
 
-            {/* Hero Section */}
-            <section id="hero" className="section hero-section">
-                {/* Header appears immediately */}
-                <Header
-                    onSecondTypingComplete={handleSecondTypingComplete}
-                    onTypingComplete={handleTypingComplete}
-                />
+            {/* Content Container */}
+            <div className="content-container">
+                {/* Background Image */}
+                <img src="/gang.png" alt="Background" className="background-image" />
 
-                {/* Paragraph appears after typing animation */}
-                {showParagraph && (
-                    <p className="paragraph streaky-glow font-bold text-white">
-                        {'Besides space problems, I enjoy solving earthly ones too.'.split(' ').map(
-                            (word, wordIndex) => (
-                                <span key={wordIndex} className="word">
-                                    {Array.from(word).map((char, charIndex) => (
-                                        <span
-                                            key={charIndex}
-                                            style={{ '--char-index': wordIndex * 10 + charIndex }}
-                                        >
-                                            {char}
+                {/* Overlay Content */}
+                <div className="overlay-content">
+                    {/* Hero Section */}
+                    <Parallax y={[0, 200]}>
+                        <section id="hero" className="section hero-section">
+                            <Header
+                                onSecondTypingComplete={handleSecondTypingComplete}
+                                onTypingComplete={handleTypingComplete}
+                            />
+
+                            {showParagraph && (
+                                <p className="paragraph streaky-glow font-bold text-white">
+                                    {'Besides space problems, I enjoy solving earthly ones too.'.split(' ').map(
+                                        (word, wordIndex) => (
+                                            <span key={wordIndex} className="word">
+                                            {Array.from(word).map((char, charIndex) => (
+                                                <span
+                                                    key={charIndex}
+                                                    style={{'--char-index': wordIndex * 10 + charIndex}}
+                                                >
+                                                    {char}
+                                                </span>
+                                            ))}
+                                                <span>&nbsp;</span>
                                         </span>
-                                    ))}
-                                    <span>&nbsp;</span>
-                                </span>
-                            )
-                        )}
-                    </p>
-                )}
+                                        )
+                                    )}
+                                </p>
+                            )}
 
-                {/* Render the AstronautCanvas but control its visibility */}
-                <AstronautCanvas
-                    showAstronaut={showAstronaut}
-                    onModelLoaded={handleModelLoaded}
-                />
-            </section>
-
-            {/* Tech Stack Section */}
-
-            {/* Future sections like Experience, Contact can be added similarly */}
+                            <AstronautCanvas
+                                showAstronaut={showAstronaut}
+                                onModelLoaded={handleModelLoaded}
+                            />
+                        </section>
+                    </Parallax>
+                    {/* Tech Stack Section */}
+                    <Parallax y={[0, -300]}>
+                        <TechStack/>
+                    </Parallax>
+                    <div id="experience">
+                        <Experience/>
+                    </div>
+                </div>
+            </div>
         </div>
+</ParallaxProvider>
     );
 }
 

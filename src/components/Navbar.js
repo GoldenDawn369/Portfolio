@@ -15,10 +15,11 @@ const Navbar = () => {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-
+        console.log(item);
         // Scroll to the corresponding section
         const sectionId = item.toLowerCase().replace(/\s+/g, '-'); // Convert to id format
         const section = document.getElementById(sectionId);
+        console.log(sectionId);
         if (section) {
             section.scrollIntoView({ behavior: 'smooth' });
         }
@@ -26,7 +27,7 @@ const Navbar = () => {
 
     return (
         <nav className={`navbar ${animateClass}`}>
-            {['Hero', 'Tech Stack', 'Experience', 'Contact'].map((item) => (
+            {['Hero', 'Tech Stack', 'Experience','Portfolio', 'Contact'].map((item) => (
                 <div
                     key={item}
                     className={`nav-item ${selectedItem === item ? 'selected' : ''}`}

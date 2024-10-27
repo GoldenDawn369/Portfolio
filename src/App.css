@@ -1,83 +1,65 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* App.css */
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  background-image: url('C:\Users\Rober\Personal Projects\portfolio-project\public\background4.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+
 .App {
+  text-align: center;
+  overflow-y: auto; /* Enable vertical scrolling for additional sections */
+}
+
+/* Content Container */
+.content-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Background Image */
+.background-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Overlay Content */
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Ensure overlay content covers the full height of the image */
+  height: 100%;
+  /* Bring content in front of the image */
+  z-index: 1;
+  /* Optional: Adjust scrolling if necessary */
+  /* overflow: hidden; */
+}
+
+/* Hero Section */
+#hero {
+  width: 100%;
+  min-height: 100vh; /* Ensure it covers at least the viewport height */
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: white;
-  position: relative;
-}
-.content-container {
-  display: flex;
-  align-items: center;
 }
 
-.paragraph-container {
-  margin-left: 20px; /* Adjust spacing between canvas and paragraph */
-  color: white;
-  max-width: 300px;
-}
-
-
-
+/* Paragraph styling */
 .paragraph {
-  position: absolute;
-  top: 25vh;
-  right: 19.6vw;
+  position:absolute;
+  top:20vh;
+  right:15vw;
+  margin-top: 20px;
   color: white;
   max-width: 300px;
   font-size: 2.3rem;
   line-height: 1.5;
-  white-space: normal; /* Allow text to wrap naturally */
-  word-break: break-word; /* Ensure words wrap at the end of the line */
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
 }
 
 /* Ensure each word behaves like a block, preventing breaks between characters */
@@ -142,12 +124,6 @@ body {
     background-position: 200% 200%;
   }
 }
-/* Canvas container styles */
-.canvas-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 1; /* Ensure Canvas is behind the Navbar */
-}
+
+
+/* Adjust other styles as needed */

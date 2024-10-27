@@ -1,0 +1,51 @@
+/* Tech Stack Section */
+.tech-stack {
+    width: 100%;
+    padding: 15.2rem 20px 0 20px;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    background: transparent; /* Ensure the background is transparent to show the image */
+    min-height: 100vh;
+}
+
+/* Additional styles for Tech Stack content */
+.tech-stack h2 {
+    font-size: 4.33rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.category {
+    margin-bottom: 60px;
+}
+
+.category h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds spacing between each image */
+    flex-wrap: wrap; /* Allows the images to wrap if they exceed container width */
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.circle img {
+    width: 100%;             /* Fill the container */
+    height: 100%;            /* Fill the container */
+    object-fit: contain;     /* Fit the full image within */
+    border-radius: 50%;      /* Ensure images are rounded */
+}
