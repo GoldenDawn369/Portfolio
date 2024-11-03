@@ -134,3 +134,9 @@
         height: 30px;
     }
 }
+@media (max-width: 1550px) {
+    .contact-heading {
+        font-size: 4.2rem;
+    }
+
+}

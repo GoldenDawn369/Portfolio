@@ -17,7 +17,7 @@
 
 .nav-item {
     color: grey;
-    font-size: 1.65rem;
+    font-size: 1.68rem;
     font-weight: 500;
     padding: 10px;
     cursor: pointer;
@@ -42,4 +42,10 @@
     height: 50%;  /* Half the height of the item */
     top: 25%;     /* Center the bar vertically */
     background-color: #00bfff;  /* The teal color */
+}
+
+@media (max-width: 1550px) {
+    .nav-item {
+        font-size: 1.35rem;
+    }
 }

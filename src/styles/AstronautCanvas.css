@@ -1,4 +1,14 @@
 /* AstronautCanvas.css */
+.astronaut-canvas-container {
+    position: relative;
+    width: 50vw; /* Adjust width as needed */
+    height: 100vh;
+    padding-left: 9.3rem; /* Push it to the right */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
 .astronaut-canvas.hidden {
     opacity: 0;
     visibility: hidden;

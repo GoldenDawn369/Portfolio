@@ -1,51 +1,48 @@
-/* App.css */
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-.App {
-  text-align: center;
-  overflow-y: auto; /* Enable vertical scrolling for additional sections */
+body.no-scroll {
+  overflow: hidden; /* Restrict scrolling */
 }
 
-/* Content Container */
+.App {
+  text-align: center;
+}
+
 .content-container {
   position: relative;
   width: 100%;
 }
 
-/* Background Image */
 .background-image {
   width: 100%;
   height: auto;
-  display: block;
-}
-
-/* Overlay Content */
-.overlay-content {
+  object-fit: cover;
+  object-position: top;
+  z-index: -1;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  /* Ensure overlay content covers the full height of the image */
-  height: 100%;
-  /* Bring content in front of the image */
-  z-index: 1;
-  /* Optional: Adjust scrolling if necessary */
-  /* overflow: hidden; */
 }
 
-/* Hero Section */
+.overlay-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
 #hero {
   width: 100%;
-  min-height: 100vh; /* Ensure it covers at least the viewport height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 
 /* Paragraph styling */
 .paragraph {
@@ -57,30 +54,25 @@ body {
   max-width: 300px;
   font-size: 2.3rem;
   line-height: 1.5;
-  white-space: normal;
-  word-break: break-word;
   text-align: center;
 }
 
-/* Ensure each word behaves like a block, preventing breaks between characters */
 .word {
   display: inline-block;
 }
 
-/* Letter-by-letter reveal effect for each character */
 .word span {
   opacity: 0;
   display: inline-block;
   animation: fadeInLetter 0.05s forwards, glow 4s infinite alternate,
   streaky-move 4s linear infinite;
-  animation-delay: calc(var(--char-index) * 0.02s); /* Stagger each letter */
+  animation-delay: calc(var(--char-index) * 0.025s);
 }
 
-/* Keyframes for fade-in effect */
 @keyframes fadeInLetter {
   from {
     opacity: 0;
-    transform: translateY(10px); /* Slight motion from below */
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -98,21 +90,23 @@ body {
   animation: glow 4s infinite alternate, streaky-move 4s linear infinite;
 }
 
-/* Glow animation */
 @keyframes glow {
   0% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.2),
-    0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.2),
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.2),
+    0 0 40px rgba(255, 255, 255, 0.2),
     0 0 60px rgba(255, 255, 255, 0.2);
   }
   100% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.4),
-    0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.8),
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 40px rgba(255, 255, 255, 0.8),
     0 0 60px rgba(255, 255, 255, 1);
   }
 }
 
-/* Streaky moving gradient */
 @keyframes streaky-move {
   0% {
     background-position: 0% 0%;
@@ -122,17 +116,22 @@ body {
   }
 }
 
-/* Astronaut Canvas Visibility */
-.astronaut-canvas.hidden {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease-in-out;
-}
+/* Header */
+@media (max-width: 1550px) {
+  .paragraph {
+    font-size: 1.71rem; /* Reduce by 0.4rem */
+    max-width: 230px;
+  }
 
-.astronaut-canvas.visible {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease-in-out;
-}
+  .name {
+    font-size: 5.2rem; /* Reduce size by 15% */
+  }
 
-/* Adjust other styles as needed */
+  .title {
+    font-size: 2.5rem; /* Reduce size by 15% */
+  }
+
+  .astronaut-canvas-container {
+    padding-left: 7.5rem; /* Push it to the right */
+  }
+}

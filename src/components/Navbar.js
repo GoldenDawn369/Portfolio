@@ -2,24 +2,32 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ showContent, viewportConfig }) => {
     const [selectedItem, setSelectedItem] = useState('Hero');
     const [animateClass, setAnimateClass] = useState('');
 
     useEffect(() => {
+        if (!showContent) return; // Wait until content is rendered
+
         // Trigger the animation when the component mounts
         setTimeout(() => {
             setAnimateClass('navbar-animate');
         }, 0);
 
-        // Section IDs
-        const sections = ['hero', 'tech-stack', 'experience', 'portfolio', 'contact'];
+        // Section IDs and corresponding labels
+        const sections = [
+            { id: 'hero', label: 'Hero' },
+            { id: 'tech-stack', label: 'Tech Stack' },
+            { id: 'experience', label: 'Experience' },
+            { id: 'portfolio', label: 'Portfolio' },
+            { id: 'contact', label: 'Contact' },
+        ];
 
         // Options for the observer
         const options = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.6, // Adjust this threshold as needed
+            threshold: viewportConfig.thresholds.intersectionObserverThreshold || 0.6, // Use threshold from config
         };
 
         // Callback function for the observer
@@ -27,8 +35,10 @@ const Navbar = () => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const sectionId = entry.target.id;
-                    const formattedSection = sectionId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                    setSelectedItem(formattedSection);
+                    const section = sections.find((sec) => sec.id === sectionId);
+                    if (section) {
+                        setSelectedItem(section.label);
+                    }
                 }
             });
         };
@@ -37,10 +47,10 @@ const Navbar = () => {
         const observer = new IntersectionObserver(callback, options);
 
         // Observe each section
-        sections.forEach((sectionId) => {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                observer.observe(section);
+        sections.forEach((section) => {
+            const element = document.getElementById(section.id);
+            if (element) {
+                observer.observe(element);
             }
         });
 
@@ -48,7 +58,7 @@ const Navbar = () => {
         return () => {
             observer.disconnect();
         };
-    }, []);
+    }, [showContent, viewportConfig]);
 
     const handleItemClick = (item) => {
         // Scroll to the corresponding section

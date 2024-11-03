@@ -20,7 +20,7 @@
     margin: 0;
     opacity: 0;
     transform: translateX(-100%);
-    animation-name: slideIn; /* Ensure the animation name is set */
+    animation-name: slideIn;
     animation-duration: 1.8s;
     animation-fill-mode: forwards;
 }
@@ -33,8 +33,8 @@
     white-space: nowrap;
     overflow: hidden;
     border-right: 0.15em solid white;
-    opacity: 0; /* Start hidden */
-    animation-name: typing, blink-caret; /* Ensure animation names are set */
+    opacity: 0;
+    animation-name: typing, blink-caret;
     animation-duration: 2.7s, 0.75s;
     animation-timing-function: steps(30, end), step-end;
     animation-fill-mode: forwards;
@@ -52,16 +52,17 @@
 @keyframes typing {
     0% {
         width: 0;
-        opacity: 1; /* Become visible at the start of typing */
+        opacity: 1;
     }
     100% {
         width: 100%;
-        opacity: 1; /* Keep visible after typing completes */
+        opacity: 1;
     }
 }
 
 @keyframes blink-caret {
-    from, to {
+    from,
+    to {
         border-color: transparent;
     }
     50% {
@@ -69,7 +70,9 @@
     }
 }
 
-/* Remove only the caret after typing ends */
 .title.no-caret {
-    border-right: none; /* Remove only the caret */
+    border-right: none;
+}
+@media (max-width: 1550px) {
+
 }

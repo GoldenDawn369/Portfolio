@@ -106,3 +106,11 @@
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+@media (max-width: 1550px) {
+    .project-card-title {
+        font-size: 1.4rem;
+    }
+    .project-card-description {
+        font-size: 0.8rem;
+    }
+}

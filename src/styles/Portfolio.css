@@ -98,3 +98,17 @@
     margin-right: -0.5rem;
     justify-content: center; /* Center the grid */
 }
+@media (max-width: 1550px) {
+    .heading {
+        font-size: 4.2rem;
+    }
+    .description {
+        font-size: 0.875rem;
+    }
+    .tab-button {
+        font-size: 1.1rem;
+    }
+    .project-grid {
+        margin: 0 -0.25rem;
+    }
+}
