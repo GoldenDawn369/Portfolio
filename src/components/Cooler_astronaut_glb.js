@@ -1,11 +1,11 @@
-// components/Cooler_astronaut_glb.js
-import React, { useRef, useEffect, useState } from 'react';
+// components/AstronautCanvas.js
+import React, { useRef, useEffect } from 'react';
 import { Suspense } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
-import { OrbitControls, useAnimations, Html, useGLTF } from '@react-three/drei';
+import { OrbitControls, useAnimations, useGLTF } from '@react-three/drei';
 import { TextureLoader, DoubleSide, Color, MeshStandardMaterial } from 'three';
 
-function AstronautModel({ onLoaded }) {
+function AstronautModel({ onLoaded, visible }) {
     const gltf = useGLTF('/source/Walking astronaut.glb');
 
     const textures = useLoader(TextureLoader, [
@@ -26,8 +26,14 @@ function AstronautModel({ onLoaded }) {
     const { actions } = useAnimations(animations, modelRef);
 
     useEffect(() => {
+        const loadStartTime = performance.now();
+        console.log('Astronaut loading started at:', loadStartTime.toFixed(2), 'ms');
+
         if (actions) {
-            actions[Object.keys(actions)[0]].play();
+            const firstAction = actions[Object.keys(actions)[0]];
+            if (firstAction) {
+                firstAction.play();
+            }
         }
 
         let textureIndex = 0;
@@ -41,8 +47,8 @@ function AstronautModel({ onLoaded }) {
                     map: textures[textureIndex % textures.length] || null,
                     color: new Color(0xffffff),
                     side: DoubleSide,
-                    roughness: 0.09,
-                    metalness: 0.12,
+                    roughness: 0.00,
+                    metalness: 0.0,
                 });
 
                 child.castShadow = true;
@@ -53,8 +59,13 @@ function AstronautModel({ onLoaded }) {
             }
         });
 
+        const loadEndTime = performance.now();
+        console.log('Astronaut loading completed at:', loadEndTime.toFixed(2), 'ms');
+        console.log('Total loading time:', (loadEndTime - loadStartTime).toFixed(2), 'ms');
+
         if (onLoaded) onLoaded();
-    }, [gltf, actions, onLoaded, textures]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <primitive
@@ -62,54 +73,63 @@ function AstronautModel({ onLoaded }) {
             object={gltf.scene}
             scale={0.8}
             rotation={[0, Math.PI + 0.3, 0]}
+            visible={visible}
         />
     );
 }
 
-export default function AstronautCanvas() {
-    const [modelLoaded, setModelLoaded] = useState(false);
-
-    const handleLoaded = () => {
-        setModelLoaded(true);
-    };
+export default function AstronautCanvas({ showAstronaut, onModelLoaded, lightingLevel = 'standard' }) {
+    useEffect(() => {
+        if (onModelLoaded) onModelLoaded();
+    }, [onModelLoaded]);
 
     return (
         <Canvas
             shadows
             camera={{ position: [3, 4, -3] }}
             style={{ width: '100%', height: '100vh' }}
+            dpr={[1, 2]} // Adjust device pixel ratio for performance
+            gl={{ antialias: false }} // Disable antialiasing for better performance
         >
-            {/* Ambient light for base illumination */}
-            <ambientLight intensity={0.3} />
+            {/* Conditional Lighting Setup */}
+            {lightingLevel === 'standard' ? (
+                <>
+                    {/* Ambient Light for base illumination */}
+                    <ambientLight intensity={0.5} />
 
-            {/* Hemisphere light for general illumination */}
-            <hemisphereLight
-                skyColor={0xffffff}
-                groundColor={0x444444}
-                intensity={1.0}
-                position={[0, 50, 0]}
-            />
+                    {/* Hemisphere Light for general illumination */}
+                    <hemisphereLight
+                        skyColor={0xffffff}
+                        groundColor={0x444444}
+                        intensity={1.0}
+                        position={[0, 50, 0]}
+                    />
 
-            {/* Directional lights */}
-            <directionalLight position={[0, 10, 10]} intensity={2.0} castShadow />
-            <directionalLight position={[10, 5, 5]} intensity={1.5} />
-            <directionalLight position={[-10, 5, 5]} intensity={1.5} />
-            <directionalLight position={[0, 5, -10]} intensity={1.5} />
+                    {/* Directional Lights */}
+                    <directionalLight position={[0, 10, 10]} intensity={2.0} castShadow />
+                    <directionalLight position={[10, 5, 5]} intensity={1.5} />
+                    <directionalLight position={[-10, 5, 5]} intensity={1.5} />
+                    <directionalLight position={[0, 5, -10]} intensity={1.5} />
 
-            {/* Point lights */}
-            <pointLight position={[0, 15, 0]} intensity={1.0} />
-            <pointLight position={[15, 0, 0]} intensity={1.0} />
-            <pointLight position={[-15, 0, 0]} intensity={1.0} />
-            <pointLight position={[0, -15, 0]} intensity={1.0} />
-
+                    {/* Point Lights */}
+                    <pointLight position={[0, 15, 0]} intensity={1.0} />
+                    <pointLight position={[15, 0, 0]} intensity={1.0} />
+                    <pointLight position={[-15, 0, 0]} intensity={1.0} />
+                    <pointLight position={[0, -15, 0]} intensity={1.0} />
+                </>
+            ) : (
+                <>
+                    {/* Minimal Lighting Setup */}
+                    <ambientLight intensity={0.3} />
+                    <directionalLight position={[5, 10, 5]} intensity={1.0} castShadow />
+                </>
+            )}
 
             <Suspense fallback={null}>
-                <AstronautModel onLoaded={handleLoaded} />
+                <AstronautModel onLoaded={onModelLoaded} visible={showAstronaut} />
             </Suspense>
 
-            <OrbitControls
-                enableZoom={false}
-            />
+            <OrbitControls enableZoom={false} />
         </Canvas>
     );
 }

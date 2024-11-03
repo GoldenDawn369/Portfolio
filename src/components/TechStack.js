@@ -22,7 +22,7 @@ const TechStack = () => {
             animate={controls}
             variants={{
                 hidden: {opacity: 0, y: 50},
-                visible: {opacity: 1, y: 0, transition: {duration: 0.75, ease: 'easeOut'}},
+                visible: {opacity: 1, y: 0, transition: {duration: 0.99, ease: 'easeOut'}},
             }}
             className="tech-stack"
             id="tech-stack"

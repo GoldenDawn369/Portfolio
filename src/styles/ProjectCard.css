@@ -1,0 +1,108 @@
+/* src/styles/ProjectCard.css */
+
+.project-card {
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+    .project-card {
+        width: 33.3333%; /* Three per row */
+    }
+}
+
+@media (min-width: 768px) {
+    .project-card {
+        width: 33.3333%;
+    }
+}
+
+.project-card-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px; /* Updated to 30px */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    margin-bottom: 24px; /* Moved here to keep uniformity */
+}
+
+.project-card-container:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.project-card-image {
+    width: 100%;
+    height: auto;
+    max-height: 14rem;
+    object-fit: contain;
+    transition: transform 0.5s;
+}
+
+.project-card-image:hover {
+    transform: scale(1.05);
+}
+
+/* Gradient Overlay on Hover */
+.project-card-container::before {
+    content: "";
+    background: linear-gradient(90.21deg, #00f260 -5.91%, #0575e6 111.58%);
+
+    opacity: 0.69;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: height 0.4s ease-in-out;
+    z-index: 1; /* Ensure it's below the text */
+}
+
+.project-card-container:hover::before {
+    height: 100%;
+}
+
+/* Hide the existing project-card-overlay as it's now redundant */
+.project-card-overlay {
+    display: none; /* Hide this div as we're using ::before for gradient */
+}
+
+/* Text Container Styling */
+.proj-txtx {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px); /* Start slightly below */
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    text-align: center;
+    padding: 0 1rem; /* Horizontal padding for better text flow */
+    z-index: 2; /* Ensure it appears above the gradient */
+}
+
+.project-card-container:hover .proj-txtx {
+    transform: translate(-50%, -50%) translateY(0); /* Move to center */
+    opacity: 1;
+}
+
+/* Removed background from text container */
+/* Optionally, add text shadows for better readability */
+.project-card-title {
+    font-size: 1.69rem; /* Adjusted to 30px */
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    line-height: 1.1em;
+    margin-bottom: 0.5rem; /* Space between title and description */
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.project-card-description {
+    font-size: 0.99rem; /* Adjusted to 15px */
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.8px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}

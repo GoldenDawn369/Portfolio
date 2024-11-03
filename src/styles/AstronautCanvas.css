@@ -1,0 +1,12 @@
+/* AstronautCanvas.css */
+.astronaut-canvas.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.astronaut-canvas.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out;
+}

@@ -1,0 +1,100 @@
+/* src/styles/Portfolio.css */
+
+.project {
+    padding-top: 5rem; /* Equivalent to py-20 */
+    padding-bottom: 5rem;
+    position: relative;
+}
+
+.container {
+    max-width: 75rem; /* Similar to Tailwind's container */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* Equivalent to px-4 */
+    padding-right: 1rem;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+}
+
+.heading {
+    font-size: 5rem; /* Increased from 2.25rem to 5rem */
+    font-weight: 700; /* Equivalent to font-bold */
+    text-align: center; /* Equivalent to text-center */
+    color: white;
+    margin-bottom: 1rem; /* Equivalent to mb-4 */
+}
+
+.description {
+    text-align: center; /* Equivalent to text-center */
+    color: #cbd5e0; /* Equivalent to text-gray-400 */
+    margin-bottom: 2rem; /* Equivalent to mb-8 */
+    padding-left: 1rem; /* Equivalent to px-4 */
+    padding-right: 1rem;
+}
+
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-radius: 9999px; /* Rounded corners for entire tab container */
+    overflow: hidden; /* Ensures the rounded border effect is applied to children */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Thicker, more visible border around the container */
+}
+
+.tab-button {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.36rem;
+    cursor: pointer;
+    border: none; /* Remove default button borders */
+    background-color: #1f1f1f; /* Default background for inactive tabs */
+    color: #d1d5db; /* Default text color for inactive tabs */
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+}
+
+/* Active tab styles */
+.tab-button.active {
+    background: linear-gradient(to right, #00f260, #0575e6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+}
+
+/* Hover effect for inactive tabs */
+.tab-button.inactive:hover {
+    background-color: #2d2d2d; /* Slightly darker on hover */
+}
+
+/* Conditional Borders */
+
+/* Border between Tab 2 and Tab 3 when Tab 1 is active */
+.border-left-custom {
+    border-left: 2.01px solid rgba(255, 255, 255, 0.42);
+}
+
+/* Border between Tab 1 and Tab 2 when Tab 3 is active */
+.border-right-custom {
+    border-right: 2.01px solid rgba(255, 255, 255, 0.42);
+}
+
+.background-decor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 25%; /* Equivalent to w-1/4 */
+    opacity: 0.5; /* Equivalent to opacity-50 */
+}
+
+/* Grid Layout for Projects */
+.project-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.5rem; /* Reduced from -1rem for smaller spacing */
+    margin-right: -0.5rem;
+    justify-content: center; /* Center the grid */
+}

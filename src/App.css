@@ -49,9 +49,9 @@ body {
 
 /* Paragraph styling */
 .paragraph {
-  position:absolute;
-  top:20vh;
-  right:15vw;
+  position: absolute;
+  top: 20vh;
+  right: 17.33vw;
   margin-top: 20px;
   color: white;
   max-width: 300px;
@@ -71,7 +71,8 @@ body {
 .word span {
   opacity: 0;
   display: inline-block;
-  animation: fadeInLetter 0.05s forwards, glow 4s infinite alternate, streaky-move 4s linear infinite;
+  animation: fadeInLetter 0.05s forwards, glow 4s infinite alternate,
+  streaky-move 4s linear infinite;
   animation-delay: calc(var(--char-index) * 0.02s); /* Stagger each letter */
 }
 
@@ -100,17 +101,13 @@ body {
 /* Glow animation */
 @keyframes glow {
   0% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
-    0 0 10px rgba(255, 255, 255, 0.2),
-    0 0 20px rgba(255, 255, 255, 0.2),
-    0 0 40px rgba(255, 255, 255, 0.2),
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.2),
     0 0 60px rgba(255, 255, 255, 0.2);
   }
   100% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
-    0 0 10px rgba(255, 255, 255, 0.4),
-    0 0 20px rgba(255, 255, 255, 0.6),
-    0 0 40px rgba(255, 255, 255, 0.8),
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.8),
     0 0 60px rgba(255, 255, 255, 1);
   }
 }
@@ -125,5 +122,17 @@ body {
   }
 }
 
+/* Astronaut Canvas Visibility */
+.astronaut-canvas.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.astronaut-canvas.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out;
+}
 
 /* Adjust other styles as needed */

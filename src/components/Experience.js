@@ -55,7 +55,7 @@ const experiences = [
     {
         title: "Other Experience",
         details: [
-            "Worked on multiple <span style='color: white;'>SAAS Startups,</span> built them all from the <span style='color: white;'>Ground Up</span>",
+            "Worked on multiple <span style='color: white;'>SaaS Startups,</span> built them all from the <span style='color: white;'>Ground Up</span>",
             "<span style='color: white;'> Managed teams</span> of up to 10 people from a wide range of  <span style='color: white;'> Proffessions</span>",
             " <span style='color: white;'>Hired</span> people from all over the  <span style='color: white;'>World</span> to meet project  <span style='color: white;'>Requirements</span>",
             "Worked in <span style='color: white;'>Sales</span> I was the <span style='color: white;'>Top Performer</span> on my <span style='color: white;'>First Month</span> of joining the team",
@@ -142,4 +142,4 @@ const Experience = () => {
     );
 };
 
-export default SectionWrapper(Experience, "portfolio");
+export default SectionWrapper(Experience, "experience");

@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Header.css';
 
-export default function Header({ onSecondTypingComplete, onTypingComplete }) {
+export default function Header({ onAnimationsComplete }) {
     const [showTitle, setShowTitle] = useState(false);
+    const [caretRemoved, setCaretRemoved] = useState(false);
 
     useEffect(() => {
         // Delay showing the title to match the animation timing
@@ -14,32 +15,23 @@ export default function Header({ onSecondTypingComplete, onTypingComplete }) {
         return () => clearTimeout(timer);
     }, []);
 
-    // Handle the end of the first slide-in animation ("Robertas Buila")
-    const handleNameAnimationEnd = (event) => {
-        if (event.animationName === 'slideIn') {
-            event.target.classList.add('no-caret');
-            // We don't need to trigger any callback here since we want to avoid astronaut appearing after this
-        }
-    };
-
-    // Handle the end of the typing animation ("Software Developer")
+    // Handle the end of the typing animation ("Fullstack Engineer")
     const handleTitleAnimationEnd = (event) => {
         if (event.animationName === 'typing') {
-            event.target.classList.add('no-caret');
-            if (onSecondTypingComplete) onSecondTypingComplete();
-            // Delay before starting the next animation (18ms after astronaut appears)
-            setTimeout(() => {
-                if (onTypingComplete) onTypingComplete();
-            }, 18); // 18ms delay after the astronaut appears
+            setCaretRemoved(true); // Update state to remove caret
+            if (onAnimationsComplete) onAnimationsComplete();
         }
     };
 
     return (
         <header className="header">
             <div className="text-container">
-                <h1 className="name" onAnimationEnd={handleNameAnimationEnd}>Robertas Buila</h1>
+                <h1 className="name">Robertas Buila</h1>
                 {showTitle && (
-                    <p className="title" onAnimationEnd={handleTitleAnimationEnd}>
+                    <p
+                        className={`title ${caretRemoved ? 'no-caret' : ''}`}
+                        onAnimationEnd={handleTitleAnimationEnd}
+                    >
                         Fullstack Engineer
                     </p>
                 )}
