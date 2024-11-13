@@ -142,7 +142,7 @@ function App() {
                             <AstronautCanvas
                                 showAstronaut={modelLoaded && animationsComplete}
                                 onModelLoaded={handleModelLoaded}
-                                scale={viewportConfig.scales.astronautScale || 1}
+                                viewportConfig={viewportConfig}
                             />
                         </section>
 
@@ -151,7 +151,7 @@ function App() {
                             <>
                                 {/* Tech Stack Section */}
                                 <section id="tech-stack" className="section">
-                                    <Parallax translateY={viewportConfig.parallax.techStackTranslateY || [0, -40]}>
+                                    <Parallax translateY={viewportConfig.parallax.techStackTranslateY || [0, 20]}>
                                         <TechStack />
                                     </Parallax>
                                 </section>

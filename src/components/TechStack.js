@@ -64,6 +64,8 @@ const TechStack = () => {
                         '/technologies/numpy.png',
                         '/technologies/pandas.png',
                         '/technologies/scikit.png',
+                        '/technologies/NLTK.png',
+                        '/technologies/gensim.png',
                         '/technologies/spacy.png',
                         '/technologies/flask.png',
                         '/technologies/django.png',

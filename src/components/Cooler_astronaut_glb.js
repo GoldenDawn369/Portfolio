@@ -1,3 +1,4 @@
+// src/components/AstronautCanvas.js
 import React, { useRef, useEffect } from 'react';
 import { Suspense } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
@@ -62,23 +63,30 @@ function AstronautModel({ onLoaded, visible, scale }) {
         <primitive
             ref={modelRef}
             object={gltf.scene}
-            scale={0.8}
+            scale={scale}
             rotation={[0, Math.PI + 0.3, 0]}
             visible={visible}
         />
     );
 }
 
-export default function AstronautCanvas({ showAstronaut, onModelLoaded, lightingLevel = 'standard' }) {
+export default function AstronautCanvas({ showAstronaut, onModelLoaded, viewportConfig, lightingLevel = 'standard' }) {
     useEffect(() => {
         if (onModelLoaded) onModelLoaded();
     }, [onModelLoaded]);
+
+    // Extract configurations
+    const astronautScale = viewportConfig.scales.astronautScale || 0.8;
+    const cameraPosition = viewportConfig.camera?.position || [3, 4, -3];
+    const enableZoom = viewportConfig.controls?.enableZoom ?? false;
+    const minDistance = viewportConfig.controls?.minDistance || 3;
+    const maxDistance = viewportConfig.controls?.maxDistance || 10;
 
     return (
         <div className="astronaut-canvas-container">
             <Canvas
                 shadows
-                camera={{ position: [3, 4, -3] }}
+                camera={{ position: cameraPosition }}
                 style={{ width: '100%', height: '100vh', position: 'relative' }}
                 dpr={[1, 2]}
                 gl={{ antialias: false }}
@@ -103,9 +111,9 @@ export default function AstronautCanvas({ showAstronaut, onModelLoaded, lighting
                     </>
                 )}
                 <Suspense fallback={null}>
-                    <AstronautModel onLoaded={onModelLoaded} visible={showAstronaut} />
+                    <AstronautModel onLoaded={onModelLoaded} visible={showAstronaut} scale={astronautScale} />
                 </Suspense>
-                <OrbitControls enableZoom={false} />
+                <OrbitControls enableZoom={enableZoom} minDistance={minDistance} maxDistance={maxDistance} />
             </Canvas>
         </div>
     );
